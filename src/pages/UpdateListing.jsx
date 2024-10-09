@@ -36,7 +36,7 @@ export default function CreateListing() {
   useEffect(() => {
     const fetchListing = async () => {
       const listingId = params.listingId;
-      const res = await fetch(`https://mernestate-backend.onrender.com/listing/get/${listingId}`);
+      const res = await fetch(`https://mernestate-backend.onrender.com/listing/v3/getListing/${listingId}`);
       const data = await res.json();
       if (data.success === false) {
         console.log(data.message);

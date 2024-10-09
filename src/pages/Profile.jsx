@@ -173,7 +173,7 @@ export default function Profile() {
 
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
+      const res = await fetch(`https://mernestate-backend.onrender.com/listing/v3/delete/${listingId}`, {
         method: 'DELETE',
       });
       const data = await res.json();
