@@ -24,7 +24,7 @@ function LoginForm() {
 
     try {
      dispatch(signInStart());
-      const res = await fetch('http://localhost:3000/auth/v1/signin', {
+      const res = await fetch('https://mernestate-backend.onrender.com/auth/v1/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -24,7 +24,7 @@ function SignupForm() {
     setError(''); // Reset error state
 
     try {
-      const res = await fetch('http://localhost:3000/auth/v1/signup', {
+      const res = await fetch('https://mernestate-backend.onrender.com/auth/v1/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

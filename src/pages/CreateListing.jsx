@@ -133,7 +133,7 @@ export default function CreateListing() {
       setLoading(true);
       setError(false);
       const token = localStorage.getItem('authToken');
-      const res = await fetch('http://localhost:3000/listing/v3/create', {
+      const res = await fetch('https://mernestate-backend.onrender.com/listing/v3/create', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

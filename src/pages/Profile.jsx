@@ -80,7 +80,7 @@ export default function Profile() {
       const token = localStorage.getItem('authToken');
       console.log("authToken",token);
       
-      const res = await fetch(`http://localhost:3000/user/v2/update/${currentUser._id}`, {
+      const res = await fetch(`https://mernestate-backend.onrender.com/user/v2/update/${currentUser._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ export default function Profile() {
   const handleDeleteUser = async () => {
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`http://localhost:3000/user/v2/delete/${currentUser._id}`, {
+      const res = await fetch(`https://mernestate-backend.onrender.com/user/v2/delete/${currentUser._id}`, {
         method: 'DELETE',
       });
       const data = await res.json();
@@ -122,7 +122,7 @@ export default function Profile() {
     try {
       dispatch(signOutUserStart());
       const token = localStorage.getItem('authToken');
-      const res = await fetch('http://localhost:3000/auth/v1/signout',{
+      const res = await fetch('https://mernestate-backend.onrender.com/auth/v1/signout',{
         method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,  // Send the token in the header
@@ -151,7 +151,7 @@ export default function Profile() {
     try {
       setShowListingsError(false);
       const token = localStorage.getItem('authToken');
-      const res = await fetch(`http://localhost:3000/user/v2/getuserlisting/${currentUser._id}`,{
+      const res = await fetch(`https://mernestate-backend.onrender.com/user/v2/getuserlisting/${currentUser._id}`,{
       headers: {
         'Authorization': `Bearer ${token}`, 
       },
