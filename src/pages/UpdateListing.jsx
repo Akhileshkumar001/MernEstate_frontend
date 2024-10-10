@@ -38,7 +38,7 @@ export default function CreateListing() {
   useEffect(() => {
     const fetchListing = async () => {
       const listingId = params.listingId;
-      const res = await fetch(`http://localhost:3000/listing/v3/get/${listingId}`);
+      const res = await fetch(`https://mernestate-backend.onrender.com/listing/v3/get/${listingId}`);
       const data = await res.json();
   
       console.log("Fetched data:", data); // Log the fetched data
@@ -157,7 +157,7 @@ export default function CreateListing() {
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
-      const res = await fetch(`http://localhost:3000/listing/v3/update/${params.listingId}`, {
+      const res = await fetch(`https://mernestate-backend.onrender.com/v3/update/${params.listingId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

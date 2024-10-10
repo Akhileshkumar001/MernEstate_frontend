@@ -12,6 +12,7 @@ import {
   FaMapMarkerAlt,
   FaParking,
 } from 'react-icons/fa';
+import Contact from '../components/Contact';
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -26,7 +27,7 @@ export default function Listing() {
     const fetchListing = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`http://localhost:3000/listing/v3/get/${params.listingId}`);
+        const res = await fetch(`https://mernestate-backend.onrender.com/listing/v3/get/${params.listingId}`);
         const data = await res.json();
 
         // Check if ItemListing is present in the response
@@ -129,7 +130,7 @@ export default function Listing() {
                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
               </li>
             </ul>
-            {currentUser && listing.userRef !== currentUser._id && !contact && (
+            {currentUser && listing.userRef !== currentUser._id && !contact&& (
               <button
                 onClick={() => setContact(true)}
                 className='bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3'
@@ -137,7 +138,7 @@ export default function Listing() {
                 Contact landlord
               </button>
             )}
-            {/* {contact && <Contact listing={listing} />} */}
+            {contact && <Contact listing={listing} />}
           </div>
         </div>
       )}
