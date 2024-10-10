@@ -32,22 +32,30 @@ export default function CreateListing() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  console.log("form data",formData);
+  
 
   useEffect(() => {
     const fetchListing = async () => {
       const listingId = params.listingId;
-      const res = await fetch(`https://mernestate-backend.onrender.com/listing/v3/getListing/${listingId}`);
+      const res = await fetch(`http://localhost:3000/listing/v3/get/${listingId}`);
       const data = await res.json();
+  
+      console.log("Fetched data:", data); // Log the fetched data
+  
       if (data.success === false) {
         console.log(data.message);
         return;
       }
-      setFormData(data);
+      
+      // Set formData to the correct structure
+      setFormData(data.ItemListing);
+      console.log("Form data set:", data.ItemListing); // Log the set form data
     };
-
+  
     fetchListing();
-  }, []);
-
+  }, [params.listingId]); // Ensure effect runs when listingId changes
+  
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
@@ -142,16 +150,18 @@ export default function CreateListing() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem('authToken');
       if (formData.imageUrls.length < 1)
         return setError('You must upload at least one image');
       if (+formData.regularPrice < +formData.discountPrice)
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
-      const res = await fetch(`https://mernestate-backend.onrender.com/listing/update/${params.listingId}`, {
+      const res = await fetch(`http://localhost:3000/listing/v3/update/${params.listingId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({
           ...formData,
@@ -163,6 +173,8 @@ export default function CreateListing() {
       if (data.success === false) {
         setError(data.message);
       }
+      console.log("dataiD",data._id);
+      
       navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);

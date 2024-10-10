@@ -125,6 +125,8 @@ export default function CreateListing() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("formData",formData);
+    
     try {
       if (formData.imageUrls.length < 1)
         return setError('You must upload at least one image');
@@ -145,7 +147,7 @@ export default function CreateListing() {
         }),
       });
       const data = await res.json();
-      console.log(data);
+      console.log("data",data);
       
       setLoading(false);
       if (data.success === false) {

@@ -37,6 +37,8 @@ export default function Profile() {
   // allow write: if
   // request.resource.size < 2 * 1024 * 1024 &&
   // request.resource.contentType.matches('image/.*')
+  console.log("userListings",userListings);
+  
 
   useEffect(() => {
     if (file) {
@@ -171,10 +173,23 @@ export default function Profile() {
     }
   };
 
-  const handleListingDelete = async (listingId) => {
+  const handleListingDelete = async (listingId,event) => {
+    event.preventDefault();
+    const clickedElement = event.target;
+    console.log("Clicked Element:", clickedElement); // Logs the full HTML element
+    console.log("Element ID:", clickedElement.id);  // Logs the element's ID
+    console.log("Element Class List:", clickedElement.classList);
+    alert("delte listning")
+    console.log("listingID",listingId);
+    
     try {
+      const token = localStorage.getItem('authToken');
+      console.log("authToken",token);
       const res = await fetch(`https://mernestate-backend.onrender.com/listing/v3/delete/${listingId}`, {
         method: 'DELETE',
+        headers:{
+          'Authorization': `Bearer ${token}`,
+        }
       });
       const data = await res.json();
       console.log("data listing",data);
@@ -306,7 +321,7 @@ export default function Profile() {
 
               <div className='flex flex-col item-center'>
                 <button
-                  onClick={() => handleListingDelete(listing._id)}
+                  onClick={(e) => handleListingDelete(listing._id,e)}
                   className='text-red-700 uppercase'
                 >
                   Delete
