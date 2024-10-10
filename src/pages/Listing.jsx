@@ -22,6 +22,9 @@ export default function Listing() {
   const [contact, setContact] = useState(false);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
+  console.log("currentUse",currentUser);
+  
+  
 
   useEffect(() => {
     const fetchListing = async () => {

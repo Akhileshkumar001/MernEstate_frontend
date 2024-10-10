@@ -11,7 +11,15 @@ export default function Contact({ listing }) {
   useEffect(() => {
     const fetchLandlord = async () => {
       try {
-        const res = await fetch(`/api/user/${listing.userRef}`);
+        const token = localStorage.getItem('authToken');
+        const res = await fetch(`https://mernestate-backend.onrender.com/auth/v1/getUser${listing.userRef}`,{
+            headers: {
+            
+                'Authorization': `Bearer ${token}`
+              },
+        }
+           
+         );
         const data = await res.json();
         setLandlord(data);
       } catch (error) {
