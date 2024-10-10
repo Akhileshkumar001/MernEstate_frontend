@@ -157,7 +157,7 @@ export default function CreateListing() {
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
-      const res = await fetch(`https://mernestate-backend.onrender.com/v3/update/${params.listingId}`, {
+      const res = await fetch(`https://mernestate-backend.onrender.com/listing/v3/update/${params.listingId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
