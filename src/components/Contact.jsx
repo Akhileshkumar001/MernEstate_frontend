@@ -12,7 +12,7 @@ export default function Contact({ listing }) {
     const fetchLandlord = async () => {
       try {
         const token = localStorage.getItem('authToken');
-        const res = await fetch(`https://mernestate-backend.onrender.com/auth/v1/getUser${listing.userRef}`,{
+        const res = await fetch(`https://mernestate-backend.onrender.com/user/v2/${listing.userRef}`,{
             headers: {
             
                 'Authorization': `Bearer ${token}`
